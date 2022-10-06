@@ -1,0 +1,54 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'rc-tree/assets/index.css';
+@import 'antd/dist/antd.css';
+
+html,
+body {
+    min-height: 100%;
+    height: 100%;
+}
+
+.fill {
+    height: calc(100vh - 100px);
+}
+
+body {
+    display: block;
+    overflow: overlay;
+    font-family: var(--font-family);
+    font-size: 14px;
+    text-rendering: optimizeSpeed;
+    color: #333;
+    background-color: #fff;
+    height: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Scrollbar css */
+
+html *::-webkit-scrollbar {
+    border-radius: 0;
+    width: 4px;
+}
+
+html *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+html *::-webkit-scrollbar-track {
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
