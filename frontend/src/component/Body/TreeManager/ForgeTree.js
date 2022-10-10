@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable array-callback-return */
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spin } from 'antd';
@@ -14,7 +15,6 @@ import PopoverMenu from './Popover/PopoverMenu';
 import { CloseSquare, MinusSquare, PlusSquare } from './Popover/StyledTreeItem';
 import { getForgeToken, translateObject } from 'untils/request';
 import { launchViewer } from 'component/Body/ViewForge/ForgeView';
-import axios from 'axios';
 import { setUrnLink } from 'redux/UrnLink/urnSlice';
 
 function ForgeTree() {
@@ -48,6 +48,7 @@ function ForgeTree() {
                 })
                 .catch((err) => {
                     console.log(err);
+                    setLoading(false);
                 });
         }
         buckets.map((bucket) => {
@@ -64,6 +65,7 @@ function ForgeTree() {
 
                 .catch((err) => {
                     console.log(err);
+                    setLoading(false);
                 });
         });
     }, [buckets, refresh]);
@@ -82,7 +84,7 @@ function ForgeTree() {
 
     const handleReadFile = (e, data) => {
         e.preventDefault();
-        dispatch(setUrnLink(data.id));
+
         dispatch(changeBootScreen(false));
         translateObject(data);
 
@@ -92,7 +94,8 @@ function ForgeTree() {
                     headers: { Authorization: 'Bearer ' + access_token },
                 })
                 .then((res) => {
-                    if (res.status === 'success') launchViewer(data.id);
+                    launchViewer(data.id);
+                    dispatch(setUrnLink(data.id));
                 })
                 .catch((err) => {
                     console.log(err);
@@ -120,7 +123,7 @@ function ForgeTree() {
                                     label={
                                         <>
                                             <p
-                                                style={{ textAlign: 'left', margin: '2px 0' }}
+                                                style={{ textAlign: 'left', margin: '2px 0', whiteSpace: 'nowrap' }}
                                                 onContextMenu={(e) => handleContextMenu(e, bucket)}
                                             >
                                                 <FolderOpenIcon
@@ -157,7 +160,11 @@ function ForgeTree() {
                                                     label={
                                                         <>
                                                             <p
-                                                                style={{ textAlign: 'left', margin: '2px 0' }}
+                                                                style={{
+                                                                    textAlign: 'left',
+                                                                    margin: '2px 0',
+                                                                    whiteSpace: 'nowrap',
+                                                                }}
                                                                 onContextMenu={(e) => handleContextMenu(e, child)}
                                                                 onDoubleClick={(e) => handleReadFile(e, child)}
                                                             >

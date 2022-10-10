@@ -28,7 +28,6 @@ body {
     padding: 0;
     text-overflow: ellipsis;
     word-break: break-all;
-    white-space: nowrap;
 }
 
 p {

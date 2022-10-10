@@ -1,14 +1,22 @@
 /* eslint-disable no-undef */
-import { ForgeViewer } from '@contecht/react-adsk-forge-viewer';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { getForgeToken } from 'untils/request';
 import { urnSelector } from 'redux/UrnLink/urnSelcetor';
-import ExampleExtension from 'Extensions/Example/ExampleExtension';
-import ExampleTool from 'Extensions/Example/ExampleTool';
 import { bootScreenSelector } from 'redux/Refresh/refreshSelector';
 
+// Extensions
+// import HandleSelectionExtension from 'Extensions/HandleSelectionExtension/HandleSelectionExtension';
+// import ModelSummaryExtension from 'Extensions/ModelSummaryExtension/ModelSummaryExtension';
+import IconMarkupExtension from 'Extensions/IconMarkupExtension/IconMarkupExtension';
+import TurnTableExtension from 'Extensions/CameraRotation/CameraRotation';
+// import DrawToolExtension from 'Extensions/DrawToolExtension/DrawToolExtension';
+// import RegisterTransformTool from 'Extensions/TransformationExtension/TransformationExtension';
+
 let viewer;
+
+const extensions = ['CameraRotation'];
 
 function onDocumentLoadSuccess(doc) {
     let viewables = doc.getRoot().getDefaultGeometry();
@@ -30,8 +38,34 @@ export function launchViewer(urn) {
         };
 
         Autodesk.Viewing.Initializer(options, () => {
+            //Register Extension
+            //
+            //======================= Extensions processed ============//
+            //Transformation Extension
+            //  RegisterTransformTool();
+
+            //  //Model Summary Extension
+            //  Autodesk.Viewing.theExtensionManager.registerExtension('ModelSummaryExtension', ModelSummaryExtension);
+
+            //  //Handle Selection Extension
+            //  Autodesk.Viewing.theExtensionManager.registerExtension(
+            //      'HandleSelectionExtension',
+            //      HandleSelectionExtension,
+            //  );
+
+            //Draw Tool Extension
+            // Autodesk.Viewing.theExtensionManager.registerExtension('DrawToolExtension', DrawToolExtension);
+
+            //========================================================//
+
+            //Icon Markup Extension
+            // Autodesk.Viewing.theExtensionManager.registerExtension('IconMarkupExtension', IconMarkupExtension);
+
+            //Camera Rotation
+            Autodesk.Viewing.theExtensionManager.registerExtension('CameraRotation', TurnTableExtension);
+
             viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('forgeViewer'), {
-                extensions: ['Autodesk.DocumentBrowser'],
+                extensions: extensions,
             });
 
             viewer.start();
@@ -46,7 +80,9 @@ function ViewContainer() {
 
     const urn = useSelector(urnSelector);
 
-    const token = localStorage.getItem('token');
+    useEffect(() => {
+        launchViewer(urn);
+    }, [urn]);
 
     return (
         <>
@@ -57,18 +93,7 @@ function ViewContainer() {
                     style={{ width: '100%', height: '100%', opacity: '0.85' }}
                 />
             ) : (
-                <ForgeViewer
-                    local={true}
-                    token={token}
-                    urn={urn}
-                    headless={false}
-                    initializerOptions={launchViewer(urn)}
-                    onInit={() => {}}
-                    onDocumentLoadSuccess={onDocumentLoadSuccess}
-                    onDocumentLoadError={onDocumentLoadFailure}
-                    extensions={[ExampleExtension]}
-                    activeTool={ExampleTool}
-                />
+                <div id="forgeViewer"></div>
             )}
         </>
     );

@@ -131,9 +131,97 @@
     color: #e04f4f;
 }
 
-.myAwesomeExtensionIcon {
-    background-image: url('./accsets/image/favicon.ico');
+/* Icon Markup Extension */
+
+#layout {
+    width: 100%;
+    height: calc(100vh);
+}
+
+#sidebar {
+    size: 35px;
+}
+
+label.markup {
+    position: absolute;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+label.update {
+    z-index: 1;
+}
+
+.temperatureBorder {
+    background-color: rgba(256, 256, 256, 0.5);
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.temperatureHigh {
+    font-size: 25px;
+    color: red;
+}
+
+.temperatureOk {
+    font-size: 20px;
+    color: blue;
+}
+
+.temperatureYellow {
+    font-size: 30px;
+    color: yellow;
+}
+
+.maintenance {
+    font-size: 40px;
+    color: green;
+}
+/* ============================ */
+
+/* Model Summary Extension  */
+.modelSummaryExtensionIcon {
+    background-image: url(https://github.com/encharm/Font-Awesome-SVG-PNG/raw/master/white/png/24/dashboard.png);
     background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/*  Selection Extension */
+.handleSelectionExtensionIcon {
+    background-image: url(https://github.com/encharm/Font-Awesome-SVG-PNG/raw/master/white/png/24/object-group.png);
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Draw Tool Extension */
+#box-draw-tool-button {
+    background-image: url(https://img.icons8.com/color/64/000000/left-view.png);
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#sphere-draw-tool-button {
+    background-image: url(https://img.icons8.com/color/24/000000/sphere.png);
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Camera Rotation */
+.toolbarCameraRotation {
+    background-image: url('./accsets/image/emblem_camera.png');
+    background-size: 36px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Transform Extension */
+#transformExtensionButton {
+    background-image: url(https://cdn3.iconfinder.com/data/icons/google-material-design-icons/48/ic_transform_48px-512.png);
+    background-size: 36px;
     background-repeat: no-repeat;
     background-position: center;
 }

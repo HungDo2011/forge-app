@@ -7,7 +7,6 @@ const styleTypography = {
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     lineHeight: '1.5',
-    whiteSpace: 'nowrap',
     cursor: 'pointer',
 };
 
