@@ -1,12 +1,11 @@
 /* eslint-disable no-undef */
-import { ForgeExtension, ToolInterface } from '@contecht/react-adsk-forge-viewer';
 
 const BoxDrawToolName = 'box-draw-tool';
 const SphereDrawToolName = 'sphere-draw-tool';
 const DrawToolOverlay = 'draw-tool-overlay';
 
 // Simple viewer tool for drawing boxes and spheres
-class DrawTool extends ToolInterface {
+class DrawTool extends Autodesk.Viewing.ToolInterface {
     constructor() {
         super();
 
@@ -151,7 +150,7 @@ class DrawTool extends ToolInterface {
     }
 }
 
-export default class DrawToolExtension extends ForgeExtension {
+export default class DrawToolExtension extends Autodesk.Viewing.Extension {
     constructor(viewer, options) {
         super(viewer, options);
         this.tool = new DrawTool();

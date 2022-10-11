@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-import { ForgeExtension } from '@contecht/react-adsk-forge-viewer';
 
 const optionsStyle = {
     icons: [
@@ -13,7 +12,7 @@ const optionsStyle = {
     },
 };
 
-export default class IconMarkupExtension extends ForgeExtension {
+export default class IconMarkupExtension extends Autodesk.Viewing.Extension {
     constructor(viewer, options) {
         super(viewer, options);
         this._group = null;
@@ -39,7 +38,7 @@ export default class IconMarkupExtension extends ForgeExtension {
                 this.viewer.toolbar.removeControl(this._group);
             }
         }
-        $('#' + this.viewer.clientContainer.id + ' div.adsk-viewing-viewer label.markup').remove();
+        document.querySelector('#' + this.viewer.clientContainer.id + ' div.adsk-viewing-viewer label.markup').remove();
         return true;
     }
 
@@ -86,10 +85,10 @@ export default class IconMarkupExtension extends ForgeExtension {
     }
 
     showIcons(show) {
-        const viewer = document.querySelector('#' + this.viewer.clientContainer.id + ' div.adsk-viewing-viewer');
+        const viewer = document.getElementById('#' + this.viewer.clientContainer.id + ' adsk-viewing-viewer');
 
         // remove previous...
-        document.querySelector('#' + this.viewer.clientContainer.id + ' div.adsk-viewing-viewer label.markup').remove();
+        document.querySelector('#' + this.viewer.clientContainer.id + ' adsk-viewing-viewer label.markup').remove();
         if (!show) return;
 
         // do we have anything to show?
@@ -103,7 +102,7 @@ export default class IconMarkupExtension extends ForgeExtension {
         }
 
         const onClick = (e) => {
-            this.viewer.select($(e.currentTarget).data('id'));
+            this.viewer.select(document.querySelector(e.currentTarget).data('id'));
             this.viewer.utilities.fitToView();
         };
 
@@ -125,8 +124,6 @@ export default class IconMarkupExtension extends ForgeExtension {
             label.innerText = `<span class="${icon.css}"> ${icon.label || ''}</span>`;
             label.className = 'markup update';
             label.dataId = `${icon.dbId}`;
-
-            console.log(label);
 
             label.css('display', this.viewer.isNodeVisible(icon.dbId) ? 'block' : 'none');
             label.on('click', this.options.onClick || onClick);

@@ -1,8 +1,6 @@
 /* eslint-disable no-undef */
 
-import { ForgeExtension } from '@contecht/react-adsk-forge-viewer';
-
-export default class ModelSummaryExtension extends ForgeExtension {
+export default class ModelSummaryExtension extends Autodesk.Viewing.Extension {
     constructor(viewer, options) {
         super(viewer, options);
         this._group = null;

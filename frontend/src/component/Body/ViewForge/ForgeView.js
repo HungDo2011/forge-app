@@ -7,16 +7,27 @@ import { urnSelector } from 'redux/UrnLink/urnSelcetor';
 import { bootScreenSelector } from 'redux/Refresh/refreshSelector';
 
 // Extensions
-// import HandleSelectionExtension from 'Extensions/HandleSelectionExtension/HandleSelectionExtension';
-// import ModelSummaryExtension from 'Extensions/ModelSummaryExtension/ModelSummaryExtension';
-import IconMarkupExtension from 'Extensions/IconMarkupExtension/IconMarkupExtension';
-import TurnTableExtension from 'Extensions/CameraRotation/CameraRotation';
+// import TurnTableExtension from 'Extensions/CameraRotation/CameraRotation';
+// import MarkUp3DExtension from 'Extensions/MarkUp3DExtension/MarkUp3DExtension';
 // import DrawToolExtension from 'Extensions/DrawToolExtension/DrawToolExtension';
+// import IconMarkupExtension from 'Extensions/IconMarkupExtension/IconMarkupExtension';
+// import NestedViewerExtension from 'Extensions/NestedViewerExtension/NestedViewerExtension';
+// import ModelSummaryExtension from 'Extensions/ModelSummaryExtension/ModelSummaryExtension';
 // import RegisterTransformTool from 'Extensions/TransformationExtension/TransformationExtension';
+// import HandleSelectionExtension from 'Extensions/HandleSelectionExtension/HandleSelectionExtension';
 
 let viewer;
 
-const extensions = ['CameraRotation'];
+const extensions = [
+    // 'TurnTable',
+    // 'MarkUp3DExtension',
+    // 'DrawToolExtension',
+    // 'IconMarkupExtension',
+    // 'NestedViewerExtension',
+    // 'ModelSummaryExtension',
+    // 'TransformationExtension',
+    // 'HandleSelectionExtension',
+];
 
 function onDocumentLoadSuccess(doc) {
     let viewables = doc.getRoot().getDefaultGeometry();
@@ -41,28 +52,34 @@ export function launchViewer(urn) {
             //Register Extension
             //
             //======================= Extensions processed ============//
-            //Transformation Extension
-            //  RegisterTransformTool();
+            // //Camera Rotation
+            // Autodesk.Viewing.theExtensionManager.registerExtension('TurnTable', TurnTableExtension);
 
-            //  //Model Summary Extension
-            //  Autodesk.Viewing.theExtensionManager.registerExtension('ModelSummaryExtension', ModelSummaryExtension);
+            // Mark Up 3D Extension
+            // Autodesk.Viewing.theExtensionManager.registerExtension('MarkUp3DExtension', MarkUp3DExtension);
 
-            //  //Handle Selection Extension
-            //  Autodesk.Viewing.theExtensionManager.registerExtension(
-            //      'HandleSelectionExtension',
-            //      HandleSelectionExtension,
-            //  );
-
-            //Draw Tool Extension
+            // //Draw Tool Extension
             // Autodesk.Viewing.theExtensionManager.registerExtension('DrawToolExtension', DrawToolExtension);
 
-            //========================================================//
-
-            //Icon Markup Extension
+            // //Icon Markup Extension
             // Autodesk.Viewing.theExtensionManager.registerExtension('IconMarkupExtension', IconMarkupExtension);
 
-            //Camera Rotation
-            Autodesk.Viewing.theExtensionManager.registerExtension('CameraRotation', TurnTableExtension);
+            // //NestedViewerExtension
+            // Autodesk.Viewing.theExtensionManager.registerExtension('NestedViewerExtension', NestedViewerExtension);
+
+            // //Model Summary Extension
+            // Autodesk.Viewing.theExtensionManager.registerExtension('ModelSummaryExtension', ModelSummaryExtension);
+
+            //Transformation Extension
+            // RegisterTransformTool();
+
+            // //Handle Selection Extension
+            // Autodesk.Viewing.theExtensionManager.registerExtension(
+            //     'HandleSelectionExtension',
+            //     HandleSelectionExtension,
+            // );
+
+            //========================================================//
 
             viewer = new Autodesk.Viewing.GuiViewer3D(document.getElementById('forgeViewer'), {
                 extensions: extensions,

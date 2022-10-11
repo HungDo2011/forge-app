@@ -1,7 +1,7 @@
 export default function RegisterTransformTool() {
-    var Autodesk = window.Autodesk;
-    var AutodeskNamespace = window.AutodeskNamespace;
-    var THREE = window.THREE;
+    let Autodesk = window.Autodesk;
+    let AutodeskNamespace = window.AutodeskNamespace;
+    let THREE = window.THREE;
 
     AutodeskNamespace('Autodesk.ADN.Viewing.Extension');
 
@@ -11,28 +11,28 @@ export default function RegisterTransformTool() {
         //
         ///////////////////////////////////////////////////////////////////////////
         function TransformTool() {
-            var _hitPoint = null;
+            let _hitPoint = null;
 
-            var _isDragging = false;
+            let _isDragging = false;
 
-            var _transformMesh = null;
+            let _transformMesh = null;
 
-            var _modifiedFragIdMap = {};
+            let _modifiedFragIdMap = {};
 
-            var _selectedFragProxyMap = {};
+            let _selectedFragProxyMap = {};
 
-            var _transformControlTx = null;
+            let _transformControlTx = null;
 
             ///////////////////////////////////////////////////////////////////////////
             // Creates a dummy mesh to attach control to
             //
             ///////////////////////////////////////////////////////////////////////////
             function createTransformMesh() {
-                var material = new THREE.MeshPhongMaterial({ color: 0xff0000 });
+                let material = new THREE.MeshPhongMaterial({ color: 0xff0000 });
 
                 viewer.impl.matman().addMaterial(guid(), material, true);
 
-                var sphere = new THREE.Mesh(new THREE.SphereGeometry(0.0001, 5), material);
+                let sphere = new THREE.Mesh(new THREE.SphereGeometry(0.0001, 5), material);
 
                 sphere.position.set(0, 0, 0);
 
@@ -44,10 +44,10 @@ export default function RegisterTransformTool() {
             //
             ///////////////////////////////////////////////////////////////////////////
             function onTxChange() {
-                for (var fragId in _selectedFragProxyMap) {
-                    var fragProxy = _selectedFragProxyMap[fragId];
+                for (let fragId in _selectedFragProxyMap) {
+                    let fragProxy = _selectedFragProxyMap[fragId];
 
-                    var position = new THREE.Vector3(
+                    let position = new THREE.Vector3(
                         _transformMesh.position.x - fragProxy.offset.x,
                         _transformMesh.position.y - fragProxy.offset.y,
                         _transformMesh.position.z - fragProxy.offset.z,
@@ -101,11 +101,11 @@ export default function RegisterTransformTool() {
                     viewer.addEventListener(Autodesk.Viewing.CAMERA_CHANGE_EVENT, onCameraChanged);
 
                     event.fragIdsArray.forEach(function (fragId) {
-                        var fragProxy = viewer.impl.getFragmentProxy(viewer.model, fragId);
+                        let fragProxy = viewer.impl.getFragmentProxy(viewer.model, fragId);
 
                         fragProxy.getAnimTransform();
 
-                        var offset = {
+                        let offset = {
                             x: _hitPoint.x - fragProxy.position.x,
                             y: _hitPoint.y - fragProxy.position.y,
                             z: _hitPoint.z - fragProxy.position.z,
@@ -129,9 +129,9 @@ export default function RegisterTransformTool() {
             //
             ///////////////////////////////////////////////////////////////////////////
             function normalize(screenPoint) {
-                var viewport = viewer.navigation.getScreenViewport();
+                let viewport = viewer.navigation.getScreenViewport();
 
-                var n = {
+                let n = {
                     x: (screenPoint.x - viewport.left) / viewport.width,
                     y: (screenPoint.y - viewport.top) / viewport.height,
                 };
@@ -144,14 +144,14 @@ export default function RegisterTransformTool() {
             //
             ///////////////////////////////////////////////////////////////////////////
             function getHitPoint(event) {
-                var screenPoint = {
+                let screenPoint = {
                     x: event.clientX,
                     y: event.clientY,
                 };
 
-                var n = normalize(screenPoint);
+                let n = normalize(screenPoint);
 
-                var hitPoint = viewer.utilities.getHitPoint(n.x, n.y);
+                let hitPoint = viewer.utilities.getHitPoint(n.x, n.y);
 
                 return hitPoint;
             }
@@ -161,10 +161,10 @@ export default function RegisterTransformTool() {
             //
             ///////////////////////////////////////////////////////////////////////////
             this.getTransformMap = function () {
-                var transformMap = {};
+                let transformMap = {};
 
-                for (var fragId in _modifiedFragIdMap) {
-                    var fragProxy = viewer.impl.getFragmentProxy(viewer.model, fragId);
+                for (let fragId in _modifiedFragIdMap) {
+                    let fragProxy = viewer.impl.getFragmentProxy(viewer.model, fragId);
 
                     fragProxy.getAnimTransform();
 
@@ -197,7 +197,7 @@ export default function RegisterTransformTool() {
             this.activate = function () {
                 viewer.select([]);
 
-                var bbox = viewer.model.getBoundingBox();
+                let bbox = viewer.model.getBoundingBox();
 
                 viewer.impl.createOverlayScene('Dotty.Viewing.Tool.TransformTool');
 
@@ -334,7 +334,7 @@ export default function RegisterTransformTool() {
 
         Autodesk.Viewing.Extension.call(this, viewer, options);
 
-        var _self = this;
+        let _self = this;
 
         _self.tool = null;
 
@@ -412,10 +412,10 @@ export default function RegisterTransformTool() {
         //
         ///////////////////////////////////////////////////////
         function guid() {
-            var d = new Date().getTime();
+            let d = new Date().getTime();
 
-            var guid = 'xxxx-xxxx-xxxx-xxxx-xxxx'.replace(/[xy]/g, function (c) {
-                var r = (d + Math.random() * 16) % 16 | 0;
+            let guid = 'xxxx-xxxx-xxxx-xxxx-xxxx'.replace(/[xy]/g, function (c) {
+                let r = (d + Math.random() * 16) % 16 | 0;
                 d = Math.floor(d / 16);
                 return (c === 'x' ? r : (r & 0x7) | 0x8).toString(16);
             });

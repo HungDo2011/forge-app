@@ -1,10 +1,11 @@
 export const loadScript = () => {
     new Promise((resolve, reject) => {
         let ready = false;
-        const script = document.createElement('script');
-        script.src = 'https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.min.js';
-        script.async = true;
-        document.head.appendChild(script);
+
+        const viewer3DScript = document.createElement('script');
+        viewer3DScript.src = 'https://developer.api.autodesk.com/modelderivative/v2/viewers/7.*/viewer3D.min.js';
+        viewer3DScript.async = true;
+        document.head.appendChild(viewer3DScript);
 
         const style = document.createElement('link');
         style.rel = 'stylesheet';
@@ -24,19 +25,19 @@ export const loadScript = () => {
         TransformationStyle.rel = 'stylesheet';
         document.head.appendChild(TransformationStyle);
 
-        script.onload = () => {
+        viewer3DScript.onload = () => {
             if (!ready) {
                 ready = true;
-                resolve(script);
+                resolve(viewer3DScript);
             }
         };
 
-        script.onerror = (err) => {
+        viewer3DScript.onerror = (err) => {
             console.log(err);
             reject(new Error('Error loading Forge script!'));
         };
 
-        script.onabort = (err) => {
+        viewer3DScript.onabort = (err) => {
             console.log(err);
             reject(new Error('Forge script loading aborted.'));
         };
