@@ -17,20 +17,22 @@ const styleModal = {
     width: '600px',
     bgcolor: 'background.paper',
     border: '2px solid #000',
-    boxShadow: 24,
     pt: 2,
     px: 4,
     pb: 3,
+    boxShadow: 24,
+    borderRadius: '16px',
+    borderColor: 'transparent',
 };
 
 const btnCloseStyle = {
     marginTop: '-2px',
-    fontSize: '21px',
-    fontWeight: 700,
+    fontSize: '30px',
+    fontWeight: 400,
     lineHeight: 1,
     color: '#000',
     textShadow: '0 1px 0 #fff',
-    opacity: '0.2',
+    opacity: '0.4',
     border: 0,
 };
 
@@ -42,9 +44,9 @@ function CreateBucket() {
 
     const handleClose = () => setOpen(false);
 
-    const handleCreateNewBucket = async () => {
+    const handleCreateNewBucket = () => {
         const newBucket = { bucketKey: `${value}` };
-        await createNewBucket(newBucket, dispatch);
+        createNewBucket(newBucket, dispatch);
         setOpen(false);
         setValue('');
         dispatch(changeRefreshTree(false));
@@ -108,19 +110,34 @@ function CreateBucket() {
                                 />
 
                                 <div className="modal-body">
-                                    <p id="newBucketKey" className="form-content" style={{ whiteSpace: 'break-spaces' }}>
-                                        For demonstration purposes, objects files are NOT automatically translated. After you upload, right
-                                        click on the object and select "Translate". Note: Technically your bucket name is required to be
-                                        globally unique across the entire platform - to keep things simple with this tutorial your client ID
-                                        will be prepended by default to your bucket name and in turn masked by the UI so you only have to
-                                        make sure your bucket name is unique within your current Forge app.
+                                    <p
+                                        id="newBucketKey"
+                                        className="form-content"
+                                        style={{ whiteSpace: 'break-spaces' }}
+                                    >
+                                        For demonstration purposes, objects files are NOT automatically translated.
+                                        After you upload, double click on the object. Note: Technically your bucket name
+                                        is required to be globally unique across the entire platform - to keep things
+                                        simple with this tutorial your client ID will be prepended by default to your
+                                        bucket name and in turn masked by the UI so you only have to make sure your
+                                        bucket name is unique within your current Forge app.
                                     </p>
                                 </div>
                                 <div className="modal-footer" style={{ margin: '30px 0 10px' }}>
-                                    <button type="button" className="btn btn-default" data-dismiss="modal" onClick={handleClose}>
+                                    <button
+                                        type="button"
+                                        className="btn btn-default"
+                                        data-dismiss="modal"
+                                        onClick={handleClose}
+                                    >
                                         Cancel
                                     </button>
-                                    <button type="button" className="btn btn-primary" id="createNewBucket" onClick={handleCreateNewBucket}>
+                                    <button
+                                        type="button"
+                                        className="btn btn-primary"
+                                        id="createNewBucket"
+                                        onClick={handleCreateNewBucket}
+                                    >
                                         Go ahead, create the bucket
                                     </button>
                                 </div>

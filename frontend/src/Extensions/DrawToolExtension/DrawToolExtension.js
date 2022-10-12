@@ -172,16 +172,6 @@ export default class DrawToolExtension extends Autodesk.Viewing.Extension {
         return true;
     }
 
-    activate() {
-        console.log('active');
-        return true;
-    }
-
-    deactivate() {
-        console.log('deactive');
-        return true;
-    }
-
     onToolbarCreated() {
         this._createUI();
     }

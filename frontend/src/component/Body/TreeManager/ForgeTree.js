@@ -14,7 +14,6 @@ import { changeBootScreen, changeRefreshTree } from 'redux/Refresh/refreshSlice'
 import PopoverMenu from './Popover/PopoverMenu';
 import { CloseSquare, MinusSquare, PlusSquare } from './Popover/StyledTreeItem';
 import { getForgeToken, translateObject } from 'untils/request';
-import { launchViewer } from 'component/Body/ViewForge/ForgeView';
 import { setUrnLink } from 'redux/UrnLink/urnSlice';
 
 function ForgeTree() {
@@ -84,8 +83,7 @@ function ForgeTree() {
 
     const handleReadFile = (e, data) => {
         e.preventDefault();
-
-        dispatch(changeBootScreen(false));
+        dispatch(changeBootScreen(true));
         translateObject(data);
 
         getForgeToken(function (access_token) {
@@ -94,8 +92,8 @@ function ForgeTree() {
                     headers: { Authorization: 'Bearer ' + access_token },
                 })
                 .then((res) => {
-                    launchViewer(data.id);
-                    dispatch(setUrnLink(data.id));
+                    dispatch(setUrnLink(res.data.urn));
+                    dispatch(changeBootScreen(false));
                 })
                 .catch((err) => {
                     console.log(err);

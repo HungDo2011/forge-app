@@ -1,15 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const urnSlice = createSlice({
-  name: "urn",
-  initialState: {
-    urnLink: null,
-  },
-  reducers: {
-    setUrnLink(state, action) {
-      state.urnLink = action.payload;
+    name: 'urn',
+    initialState: {
+        urnLink: '',
     },
-  },
+    reducers: {
+        setUrnLink(state, action) {
+            state.urnLink = action.payload;
+        },
+    },
 });
 
 const { actions, reducer } = urnSlice;

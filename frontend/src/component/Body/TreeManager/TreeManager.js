@@ -1,15 +1,15 @@
+import { useDispatch } from 'react-redux';
 import CachedIcon from '@mui/icons-material/Cached';
 
-import CreateBucket from '../Modal/CreateBucket';
 import ForgeTree from './ForgeTree';
+import CreateBucket from '../Modal/CreateBucket';
 import { changeRefreshTree } from 'redux/Refresh/refreshSlice';
-import { useDispatch } from 'react-redux';
 
 function TreeManager() {
     const dispatch = useDispatch();
 
     return (
-        <div className="panel panel-default">
+        <div className="panel panel-default fill">
             <div className="panel-heading" data-toggle="tooltip">
                 <div className="col-xs-8 fill">
                     <p style={{ float: 'left', width: 'auto' }}>
