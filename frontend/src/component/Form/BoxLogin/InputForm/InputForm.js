@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { authRequest } from 'untils/request';
 import { testEmail, testPassword } from 'Validator';
 import { Link } from 'react-router-dom';
-import { isFetchingSelector } from 'redux/Auth/authSelector';
+import { isFetchingSelector, messSelector } from 'redux/Auth/authSelector';
 
 const inputStyle = { width: '100%', marginTop: 20 };
 
@@ -30,6 +30,8 @@ function InputForm({ login }) {
     const [checked, setChecked] = useState(false);
 
     const isFetching = useSelector(isFetchingSelector);
+
+    const messErr = useSelector(messSelector);
 
     const dispatch = useDispatch();
 
@@ -160,7 +162,9 @@ function InputForm({ login }) {
                             style={inputStyle}
                             size="small"
                         />
-                        {errValueRePassword && <p style={errStyle}>Your password and confirmation password must match</p>}
+                        {errValueRePassword && (
+                            <p style={errStyle}>Your password and confirmation password must match</p>
+                        )}
 
                         <div style={{ marginTop: 10 }}>
                             <span style={{ fontSize: 12, textTransform: 'none' }}>
@@ -176,13 +180,31 @@ function InputForm({ login }) {
                                     onClick={() => setChecked(!checked)}
                                 />
                                 I agree to the{' '}
-                                <a href="https://www.autodesk.com/company/terms-of-use/en/general-terms">Autodesk Terms of Use</a> and the{' '}
-                                <a href="https://www.autodesk.com/company/legal-notices-trademarks/privacy-statement">Privacy Statement</a>.
+                                <a href="https://www.autodesk.com/company/terms-of-use/en/general-terms">
+                                    Autodesk Terms of Use
+                                </a>{' '}
+                                and the{' '}
+                                <a href="https://www.autodesk.com/company/legal-notices-trademarks/privacy-statement">
+                                    Privacy Statement
+                                </a>
+                                .
                             </span>
                         </div>
                     </>
                 )}
-
+                {(
+                    <p
+                        style={{
+                            marginTop: '14px',
+                            marginBottom: '-14px',
+                            fontSize: '12px',
+                            color: '#f15e5e',
+                            fontWeight: '600',
+                        }}
+                    >
+                        {messErr}
+                    </p>
+                ) ?? <></>}
                 <Button
                     className="btn-submit"
                     sx={{
@@ -195,7 +217,13 @@ function InputForm({ login }) {
                     }}
                     onClick={handleSubmit}
                 >
-                    {isFetching ? <CircularProgress size="20px" sx={{ color: '#efeff0' }} /> : login ? ' Sign In' : 'Create accout'}
+                    {isFetching ? (
+                        <CircularProgress size="20px" sx={{ color: '#efeff0' }} />
+                    ) : login ? (
+                        ' Sign In'
+                    ) : (
+                        'Create accout'
+                    )}
                 </Button>
             </form>
             <p
@@ -221,7 +249,6 @@ function InputForm({ login }) {
                             cursor: 'pointer',
                         }}
                     >
-                        {' '}
                         CREATE ACCOUNT
                     </Link>
                 ) : (
@@ -238,7 +265,6 @@ function InputForm({ login }) {
                             cursor: 'pointer',
                         }}
                     >
-                        {' '}
                         SIGN IN
                     </Link>
                 )}

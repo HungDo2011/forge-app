@@ -16,6 +16,7 @@
     font-size: 13px;
     color: #f16969;
     border-color: #beadad;
+    float: left;
 }
 
 .btn-reset:hover {
@@ -50,7 +51,7 @@
 }
 
 .container-body {
-    /* margin-top: 60px; */
+    margin: 0;
 }
 
 .panel {
@@ -240,8 +241,35 @@ label.update {
     background-position: center;
 }
 
+/* Nested Viewer */
+
+#nestedViewerExtensionButton {
+    background-image: url(https://img.icons8.com/color/64/000000/picture-in-picture.png);
+    background-size: 24px;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: grayscale(100%);
+}
+
+#nestedViewerExtensionButton.active {
+    filter: none;
+}
+
+#nestedViewerExtensionDropdown {
+    background: #eee;
+    color: #333;
+}
+
 /* My Extension */
 #MyExtensionButton {
+    background-image: url(https://cdn4.iconfinder.com/data/icons/sketchy-basic-icons/95/smile-512.png);
+    background-size: 36px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Explode Extension */
+.explodeButton {
     background-image: url(https://cdn4.iconfinder.com/data/icons/sketchy-basic-icons/95/smile-512.png);
     background-size: 36px;
     background-repeat: no-repeat;

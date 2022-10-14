@@ -21,7 +21,7 @@ export default class TurnTableExtension extends Autodesk.Viewing.Extension {
     }
 
     customize() {
-        var viewer = this.viewer;
+        let viewer = this.viewer;
         //Start coding here ...
 
         const turnTableToolbarButton = new Autodesk.Viewing.UI.Button('turnTableButton');
@@ -33,26 +33,26 @@ export default class TurnTableExtension extends Autodesk.Viewing.Extension {
         this.subToolbar.addControl(turnTableToolbarButton);
         viewer.toolbar.addControl(this.subToolbar);
 
-        var started = false;
+        let started = false;
 
-        var rotateCamera = () => {
+        let rotateCamera = () => {
             if (started) {
                 requestAnimationFrame(rotateCamera);
             }
 
-            var nav = viewer.navigation;
-            var up = nav.getCameraUpVector();
-            var axis = new THREE.Vector3(0, 0, 1);
-            var speed = (10.0 * Math.PI) / 180;
-            var matrix = new THREE.Matrix4().makeRotationAxis(axis, speed * 0.1);
+            let nav = viewer.navigation;
+            let up = nav.getCameraUpVector();
+            let axis = new THREE.Vector3(0, 0, 1);
+            let speed = (10.0 * Math.PI) / 180;
+            let matrix = new THREE.Matrix4().makeRotationAxis(axis, speed * 0.1);
 
-            var pos = nav.getPosition();
+            let pos = nav.getPosition();
             pos.applyMatrix4(matrix);
             up.applyMatrix4(matrix);
             nav.setView(pos, new THREE.Vector3(0, 0, 0));
             nav.setCameraUpVector(up);
-            var viewState = viewer.getState();
-            viewer.restoreState(viewState);
+            // let viewState = viewer.getState();
+            // // viewer.restoreState(viewState);
         };
 
         turnTableToolbarButton.onClick = function (e) {

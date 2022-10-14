@@ -6,11 +6,9 @@ const authSlice = createSlice({
         login: {
             currentUser: null,
             isFetching: false,
-            logged: false,
             mess: null,
         },
         register: {},
-        logout: {},
     },
     reducers: {
         loginStart(state) {
@@ -20,19 +18,16 @@ const authSlice = createSlice({
             const { token, ...user } = action.payload;
             state.login.currentUser = { ...user };
             state.login.isFetching = false;
-            state.login.logged = true;
-            state.login.mess = 'Login Success!';
 
             localStorage.setItem('token', token.access_token);
             localStorage.setItem('expires_in', token.expires_in);
             localStorage.setItem('userName', state.login.currentUser.name);
             localStorage.setItem('userEmail', state.login.currentUser.email);
-            localStorage.setItem('logged', true);
         },
-        loginFailed(state) {
+        loginFailed(state, action) {
             state.login.logged = false;
             state.login.isFetching = false;
-            state.login.mess = 'Login fail. Check your email or password!';
+            state.login.mess = action.payload;
         },
     },
 });

@@ -14,7 +14,7 @@ import { changeBootScreen, changeRefreshTree } from 'redux/Refresh/refreshSlice'
 import PopoverMenu from './Popover/PopoverMenu';
 import { CloseSquare, MinusSquare, PlusSquare } from './Popover/StyledTreeItem';
 import { getForgeToken, translateObject } from 'untils/request';
-import { setUrnLink } from 'redux/UrnLink/urnSlice';
+import launchViewer from '../ViewForge/launchViewer';
 
 function ForgeTree() {
     const [openModal, setOpenModal] = useState(false);
@@ -38,7 +38,7 @@ function ForgeTree() {
     useEffect(() => {
         setLoading(true);
 
-        if (buckets.length <= 0) {
+        if (buckets.length === 0) {
             request
                 .get('oss/buckets')
                 .then((res) => {
@@ -50,6 +50,7 @@ function ForgeTree() {
                     setLoading(false);
                 });
         }
+
         buckets.map((bucket) => {
             request
                 .get('oss/buckets', {
@@ -66,6 +67,7 @@ function ForgeTree() {
                     console.log(err);
                     setLoading(false);
                 });
+            setBuckets(buckets);
         });
     }, [buckets, refresh]);
 
@@ -83,6 +85,7 @@ function ForgeTree() {
 
     const handleReadFile = (e, data) => {
         e.preventDefault();
+
         dispatch(changeBootScreen(true));
         translateObject(data);
 
@@ -92,7 +95,7 @@ function ForgeTree() {
                     headers: { Authorization: 'Bearer ' + access_token },
                 })
                 .then((res) => {
-                    dispatch(setUrnLink(res.data.urn));
+                    launchViewer(data.id);
                     dispatch(changeBootScreen(false));
                 })
                 .catch((err) => {

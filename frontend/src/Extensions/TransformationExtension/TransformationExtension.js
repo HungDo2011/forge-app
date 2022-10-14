@@ -379,10 +379,10 @@ export default function RegisterTransformTool() {
 
             viewer.toolController.registerTool(_self.tool);
 
-            if (this.viewer.model.getInstanceTree()) {
+            if (viewer.model.getInstanceTree()) {
                 _self.customize();
             } else {
-                this.viewer.addEventListener(Autodesk.Viewing.OBJECT_TREE_CREATED_EVENT, _self.customize());
+                viewer.addEventListener(Autodesk.Viewing.OBJECT_TREE_CREATED_EVENT, _self.customize());
             }
         };
 
@@ -395,12 +395,12 @@ export default function RegisterTransformTool() {
         //
         ///////////////////////////////////////////////////////
         _self.unload = function () {
-            if (_self.tool) viewer.toolController.deactivateTool(_self.tool.getName());
+            if (this.tool) viewer.toolController.deactivateTool(_self.tool.getName());
             // Clean our UI elements if we added any
             if (this._group) {
                 this._group.removeControl(this._button);
-                if (this._group.getNumberOfControls() === 0) {
-                    this.viewer.toolbar.removeControl(this._group);
+                if (_self._group.getNumberOfControls() === 0) {
+                    viewer.toolbar.removeControl(this._group);
                 }
             }
             console.log('Autodesk.ADN.Viewing.Extension.TransformTool unloaded');

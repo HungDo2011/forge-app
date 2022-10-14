@@ -1,4 +1,4 @@
-import TreeManager from './TreeManager/TreeManager';
+import TreeContainer from './TreeManager/TreeContainer';
 import ViewContainer from './ViewForge/ForgeView';
 // import ViewForge from './ViewForge/ViewForge';
 
@@ -7,7 +7,7 @@ function Body() {
         <div className="container-fluid fill container-body">
             <div className="row fill">
                 <div className="col-sm-3 fill ">
-                    <TreeManager />
+                    <TreeContainer />
                 </div>
 
                 <div className="col-sm-9 fill">

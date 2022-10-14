@@ -7,22 +7,22 @@ import { publicRoutes } from 'routes/routes';
 import AppPage from './AppPage';
 
 function HomePage() {
-    const logged = localStorage.getItem('logged');
+    const token = localStorage.getItem('token');
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!logged) {
-            navigate('/');
-        } else {
+        if (!!token) {
             navigate('/app');
+        } else {
+            navigate('/');
         }
-    }, [!!logged]);
+    }, [token]);
 
     return (
         <div>
             <Routes>
-                {logged ? (
+                {!!token ? (
                     <Route path="/app" element={<AppPage />} />
                 ) : (
                     publicRoutes.map((route, index) => {

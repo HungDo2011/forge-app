@@ -1,9 +1,9 @@
+import { useDispatch } from 'react-redux';
 import { Popover, Typography } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { useDispatch } from 'react-redux';
-import { uploadObject } from 'untils/request';
 
+import { uploadObject } from 'untils/request';
 import { removeBucket, removeObject } from 'untils/request';
 import { changeRefreshTree } from 'redux/Refresh/refreshSlice';
 
@@ -45,8 +45,7 @@ function PopoverMenu({ data, open, anchorEl, onClose }) {
             default:
                 return;
         }
-
-        dispatch(changeRefreshTree(false));
+        dispatch(changeRefreshTree(true));
     };
 
     return (
@@ -78,7 +77,13 @@ function PopoverMenu({ data, open, anchorEl, onClose }) {
                         </span>
                         Upload file.
                         <form id="form" encType="multipart/form-data">
-                            <input id="upload" type="file" onChange={handleUploadFile} name="fileToUpload" style={{ display: 'none' }} />
+                            <input
+                                id="upload"
+                                type="file"
+                                onChange={handleUploadFile}
+                                name="fileToUpload"
+                                style={{ display: 'none' }}
+                            />
                         </form>
                     </label>
                 </Typography>

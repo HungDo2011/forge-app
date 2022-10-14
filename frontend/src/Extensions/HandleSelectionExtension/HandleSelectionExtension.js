@@ -1,8 +1,6 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-undef */
-import { ForgeExtension } from '@contecht/react-adsk-forge-viewer';
-
-export default class HandleSelectionExtension extends ForgeExtension {
+export default class HandleSelectionExtension extends Autodesk.Viewing.Extension {
     constructor(viewer, options) {
         super(viewer, options);
         this._group = null;
@@ -23,16 +21,6 @@ export default class HandleSelectionExtension extends ForgeExtension {
             }
         }
         console.log('HandleSelectionExtension has been unloaded');
-        return true;
-    }
-
-    activate() {
-        console.log('active');
-        return true;
-    }
-
-    deactivate() {
-        console.log('deactive');
         return true;
     }
 

@@ -26,7 +26,7 @@ export default class MyExtension extends Autodesk.Viewing.Extension {
 
         this._button = new Autodesk.Viewing.UI.Button('MyExtensionButton');
         this._button.addClass('MyExtension');
-        this._button.setToolTip('Do Something');
+        this._button.setToolTip('Block Zoom');
 
         //Sub Toolbar
         this._group = new Autodesk.Viewing.UI.ControlGroup('MyExtensionToolbar');
@@ -38,13 +38,14 @@ export default class MyExtension extends Autodesk.Viewing.Extension {
             _self.activateExtension = !_self.activateExtension;
             if (_self.activateExtension) {
                 _self._button.addClass('active');
-                _self.viewer.isolate();
+                _self.viewer.setNavigationLock(true);
             } else {
                 _self._button.removeClass('active');
-                // _self.viewer.deactivateExtension();
+                _self.viewer.setNavigationLock(false);
             }
+            return true;
         };
 
-        //
+        // Action
     }
 }

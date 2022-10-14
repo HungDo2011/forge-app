@@ -2,7 +2,8 @@
 import { getForgeToken } from 'untils/request';
 
 // Extensions
-import MyExtension from 'Extensions/MyExtension/MyExtension';
+// import MyExtension from 'Extensions/MyExtension/MyExtension';
+import ExplodeExtension from 'Extensions/ExplodeExtension/ExplodeExtension';
 // import TurnTableExtension from 'Extensions/CameraRotation/CameraRotation';
 // import MarkUp3DExtension from 'Extensions/MarkUp3DExtension/MarkUp3DExtension';
 // import DrawToolExtension from 'Extensions/DrawToolExtension/DrawToolExtension';
@@ -15,8 +16,9 @@ import MyExtension from 'Extensions/MyExtension/MyExtension';
 let viewer;
 
 const extensions = [
-    'MyExtension',
+    // 'MyExtension',
     // 'TurnTable',
+    'ExplodeExtension',
     // 'MarkUp3DExtension',
     // 'DrawToolExtension',
     // 'IconMarkupExtension',
@@ -46,9 +48,8 @@ function launchViewer(urn) {
         };
 
         Autodesk.Viewing.Initializer(options, () => {
-            //Register Extension
-            //
-            //======================= Extensions processed ============//
+            //==Register Extension==//
+
             // //Camera Rotation
             // Autodesk.Viewing.theExtensionManager.registerExtension('TurnTable', TurnTableExtension);
 
@@ -76,8 +77,11 @@ function launchViewer(urn) {
             //     HandleSelectionExtension,
             // );
 
+            // //Popout Extension
+            Autodesk.Viewing.theExtensionManager.registerExtension('ExplodeExtension', ExplodeExtension);
+
             // My Extension
-            Autodesk.Viewing.theExtensionManager.registerExtension('MyExtension', MyExtension);
+            // Autodesk.Viewing.theExtensionManager.registerExtension('MyExtension', MyExtension);
 
             //========================================================//
 
@@ -86,7 +90,9 @@ function launchViewer(urn) {
             });
 
             viewer.setDisplayEdges(true);
-            viewer.loadExtension('Autodesk.BIM360.GestureDocumentNavigation');
+            // viewer.loadExtension('Autodesk.BIM360.GestureDocumentNavigation');
+            viewer.loadExtension('Autodesk.Viewing.Popout');
+
             viewer.loadExtension('Autodesk.MemoryLimited');
             viewer.loadExtension('Autodesk.Viewing.MemoryLimitedDebug');
 

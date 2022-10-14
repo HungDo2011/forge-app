@@ -30,9 +30,8 @@ export const authRequest = (data, type, dispatch) => {
             dispatch(loginSuccess(res.data));
             location.reload();
         })
-        .catch((err) => {
-            console.log(err);
-            dispatch(loginFailed());
+        .catch((err, res) => {
+            dispatch(loginFailed(err.response.data));
         });
 };
 
@@ -55,7 +54,6 @@ export const removeBucket = (data, dispatch) => {
         .delete(`oss/buckets/${data.id}`)
         .then((res) => {
             alert(res.data);
-            location.reload();
         })
         .catch((err) => {
             console.log(err);
@@ -78,6 +76,7 @@ export const uploadObject = async (file, bucketId, dispatch) => {
 };
 
 export const removeObject = (data, dispatch) => {
+    dispatch(changeRefreshTree(true));
     request
         .delete('oss/objects', {
             params: {
@@ -86,8 +85,8 @@ export const removeObject = (data, dispatch) => {
             },
         })
         .then((res) => {
-            alert(res.data);
-            location.reload();
+            console.log(res.data);
+            dispatch(changeRefreshTree(false));
         })
         .catch((err) => {
             console.log(err);
